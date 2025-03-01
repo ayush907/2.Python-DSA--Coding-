@@ -108,7 +108,22 @@ class tree:
         right_sum = self.sum_of_nodes(root.right)
 
         return left_sum + right_sum + root.data
+    
 
+    # calculating the diameter of the tree
+    def diameter(self, root):
+        if root == None:
+            return 0
+        
+        left_diam = self.diameter(root.left)
+        right_diam = self.diameter(root.right)
+        left_height = self.height_bt(root.left)
+        right_height = self.height_bt(root.right)
+
+        self_diam = left_height + right_height + 1
+
+        return max(max(left_diam, right_diam), self_diam)
+    
 
 
 t = tree()
@@ -124,3 +139,4 @@ t.level_order_traversal(root)
 print()
 print(t.height_bt(root))
 print(t.count_nodes(root))
+print(f"the diameter of tree is {t.diameter(root)}")
